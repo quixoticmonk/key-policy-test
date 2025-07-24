@@ -1,0 +1,26 @@
+aws kms put-key-policy \
+    --key-id <key-id> \
+    --policy-name default \
+    --policy '{
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "Enable IAM User Permissions",
+          "Effect": "Allow",
+          "Principal": {
+            "AWS": "arn:aws:iam::ACCOUNT-ID:root"
+          },
+          "Action": "kms:*",
+          "Resource": "*"
+        },
+        {
+          "Sid": "Allow all roles admin access",
+          "Effect": "Allow",
+          "Principal": {
+            "AWS": "arn:aws:iam::ACCOUNT-ID:role/*"
+          },
+          "Action": "kms:*",
+          "Resource": "*"
+        }
+      ]
+    }'
